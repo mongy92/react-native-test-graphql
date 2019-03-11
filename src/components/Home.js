@@ -10,10 +10,10 @@ class Home extends Component {
     }
 
     render() {
+        const {navigation} = this.props;
         return (
             <View style={{flex:1}} >
-                <Button title={"GO TO POST"} onPress={ ()=> this.props.navigation.navigate("Post") } />
-                <Posts />
+                <Posts navigation={navigation} />
             </View>
         );
     }
