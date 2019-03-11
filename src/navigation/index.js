@@ -6,11 +6,13 @@ import {
 } from "react-navigation";
 import Home from "../screens/Home";
 import Post from "../screens/Post";
+import NewPost from "../screens/NewPost";
 
 
 const StackNav = createStackNavigator({
     Home,
-    Post
+    Post,
+    NewPost
   }, {
       navigationOptions: {
         headerStyle: { backgroundColor: "#373142" },
