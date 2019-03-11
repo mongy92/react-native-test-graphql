@@ -25,7 +25,8 @@ class Posts extends Component {
 }
 
 
-const postsQuery = gql`{
+const postsQuery = gql`
+  query postsQuery {
     allPosts{
       id,
       title

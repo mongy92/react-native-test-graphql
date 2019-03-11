@@ -1,24 +1,37 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, ActivityIndicator } from 'react-native'
 import PostForm from "../components/PostForm";
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo'
 
 class NewPost extends Component {
 
+  state = {
+    loading : false
+  }
 
   onSubmit = ({title,body})=>{
-    console.log(title,body)
-    this.props.newPost({
-      variables : { title, body }
+    const {newPost , navigation} = this.props;
+    this.setState({ loading : true });
+    newPost({ variables : { title, body }})
+    .then( ()=>{
+      navigation.goBack();
     })
-    .then( ()=>{} )
-    .catch( (error)=> console.log(error) );
+    .catch( (error)=>{
+      this.setState({loading : false})
+    });
   }
 render() {
   return (
     <View>
-      <PostForm onSubmit={this.onSubmit} />
+      {
+        this.state.loading ? (
+          <ActivityIndicator size={"large"} />
+        ):
+        (
+          <PostForm onSubmit={this.onSubmit} />
+        )
+      }
     </View>
   )
 }
@@ -35,5 +48,8 @@ const newPost = gql`
 
 
 export default graphql(newPost,{
-  name : "newPost"
+  name : "newPost",
+  options : {
+    refetchQueries : ['postsQuery']
+  }
 })(NewPost);
