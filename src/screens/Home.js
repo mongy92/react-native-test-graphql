@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { View, Text, Button } from "react-native";
-import Posts from "./Posts";
+import { View } from "react-native";
+import Posts from "../components/Posts";
 
 
 class Home extends Component {
