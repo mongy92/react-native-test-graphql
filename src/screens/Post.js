@@ -6,18 +6,19 @@ import { graphql } from 'react-apollo'
 
 class Post extends Component {
 
-    static navigationOptions = {
-        title: "Home"
+    static navigationOptions = ({navigation})=> {
+       return {
+        title: navigation.getParam("title","")
+       }
     }
 
     render() {
-        const { navigation, loading, Post } = this.props;
+        const {  loading, Post } = this.props;
         
         if(loading) return <ActivityIndicator size="large" />;
         return (
             <View >
-                <Text >{Post.id}</Text>
-                <Text >{Post.title}</Text>
+                <Text >{Post.body}</Text>
             </View>
         );
     }
@@ -28,12 +29,10 @@ const postQuery = gql`
     query Post($id: ID!) {
   Post(id: $id) {
     id
-    title
+    title,
+    body
   }
 }`;
-
-
-
 
 export default graphql(postQuery, {
     props: ({ data }) => ({ ...data }),

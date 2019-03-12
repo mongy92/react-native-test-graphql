@@ -31,7 +31,7 @@ export default Home;
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        justifyContent:"space-between"
+        // justifyContent:"space-between"
     },
     newPost:{
         padding:20,
