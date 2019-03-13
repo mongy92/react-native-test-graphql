@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, ActivityIndicator, FlatList, TouchableOpacity, StyleSheet } from 'react-native'
-import { graphql } from 'react-apollo'
+import { graphql } from 'react-apollo';
+import { List, ListItem, Body, Right, Icon } from "native-base";
 import gql from "graphql-tag";
 
 class Posts extends Component {
@@ -8,17 +9,26 @@ class Posts extends Component {
     const { loading, allPosts, navigation } = this.props;
     if (loading) return <ActivityIndicator size={"large"} />
     return (
-      <View style={{flex:1}} >
-        <FlatList
-          data={allPosts}
-          keyExtractor={item => `${item.id}`}
-          renderItem={({ item }) =>
-            (
-              <TouchableOpacity onPress={ ()=> navigation.navigate("Post",{ id : item.id, title : item.title }) } style={styles.post} >
-                <Text>{item.title}</Text>
-              </TouchableOpacity>
-            )}
-        />
+      <View style={{ flex: 1 }} >
+        <List>
+
+
+          <FlatList
+            data={allPosts}
+            keyExtractor={item => `${item.id}`}
+            renderItem={({ item }) =>
+              (
+                <ListItem onPress={() => navigation.navigate("Post", { id: item.id, title: item.title })} >
+                  <Body>
+                  <Text>{item.title}</Text>
+                  </Body>
+                  <Right>
+                    <Icon name={"arrow-forward"} />
+                  </Right>
+                </ListItem>
+              )}
+          />
+        </List>
       </View>
     )
   }

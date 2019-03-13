@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Text, View, TextInput, Button } from 'react-native'
+import { Text, View, TextInput, Button, StyleSheet } from 'react-native'
+import {Form, Input, Label, Item} from "native-base";
 
 export default class PostForm extends Component {
 
@@ -18,17 +19,34 @@ export default class PostForm extends Component {
 
   render() {
     return (
-      <View>
-        <TextInput 
-            onChangeText={ title=>this.setState({title}) }
-            value={this.state.title} 
-            />
-        <TextInput 
+      <Form>
+        <Item floatingLabel >
+          <Label>Title</Label>
+          <Input 
+           onChangeText={ title=>this.setState({title}) }
+           value={this.state.title} 
+          />
+        </Item>
+
+        <Item floatingLabel >
+          <Label>Body</Label>
+          <Input 
+            multiline
+            style={styles.body}
             onChangeText={ body=>this.setState({body}) }
             value={this.state.body} 
-            />
+          />
+        </Item>
         <Button title={"Save Post"} onPress={this.submitPost} />
-      </View>
+      </Form>
     )
   }
 }
+
+
+const styles = StyleSheet.create({
+  body:{
+    height : 200,
+    textAlignVertical:"top"
+  }
+})

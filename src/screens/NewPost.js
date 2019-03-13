@@ -6,6 +6,10 @@ import { graphql } from 'react-apollo'
 
 class NewPost extends Component {
 
+  static navigationOptions = {
+    title : "New Post"
+  }
+
   state = {
     loading : false
   }

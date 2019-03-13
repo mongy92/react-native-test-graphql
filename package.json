@@ -12,6 +12,7 @@
     "apollo-link-http": "^1.5.12",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
+    "native-base": "^2.12.1",
     "react": "16.6.3",
     "react-apollo": "^2.5.2",
     "react-native": "0.58.6",
