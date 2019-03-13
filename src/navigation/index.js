@@ -2,14 +2,24 @@
 import React from "react"
 import {
     createAppContainer,
-    createStackNavigator
+    createStackNavigator,
+    createSwitchNavigator
 } from "react-navigation";
 import Home from "../screens/Home";
 import Post from "../screens/Post";
 import NewPost from "../screens/NewPost";
+import Login from "../screens/Login";
+import Register from "../screens/Register";
 
 
-const StackNav = createStackNavigator({
+const AuthStack = createStackNavigator({
+  Login,
+  Register
+})
+
+
+
+const MainStack = createStackNavigator({
     Home,
     Post,
     NewPost
@@ -19,7 +29,13 @@ const StackNav = createStackNavigator({
         headerTitleStyle: { color: "#FFF" }
       }
     });
+
+
+   const RootStack = createSwitchNavigator({
+     Auth : AuthStack,
+     Main : MainStack
+   })
   
-  const Navigation = createAppContainer(StackNav);
+  const Navigation = createAppContainer(RootStack);
 
   export default Navigation;
