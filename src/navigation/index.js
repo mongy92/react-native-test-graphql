@@ -1,5 +1,6 @@
 
-import React from "react"
+import React from "react";
+import {ActivityIndicator} from "react-native";
 import {
     createAppContainer,
     createStackNavigator,
@@ -10,7 +11,8 @@ import Post from "../screens/Post";
 import NewPost from "../screens/NewPost";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
-
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
 
 const AuthStack = createStackNavigator({
   Login,
@@ -31,11 +33,32 @@ const MainStack = createStackNavigator({
     });
 
 
-   const RootStack = createSwitchNavigator({
-     Auth : AuthStack,
-     Main : MainStack
-   })
   
-  const Navigation = createAppContainer(RootStack);
+    
+  
+  const MainNav = createAppContainer(MainStack);
+  const AuthNav = createAppContainer(AuthStack);
 
-  export default Navigation;
+
+
+  const userQuery = gql`
+    query userQuery{
+      user{
+        id,
+      email
+      }
+      
+    }
+  `
+
+
+const Navigation = ({loading, user})=>{
+  console.log(loading,user)
+  if(loading) return <ActivityIndicator/>;
+  if(!user) return <AuthNav/>;
+  return <MainNav/>
+}
+
+  export default graphql(userQuery,{
+    props: ({ data }) => ({ ...data })
+  })(Navigation);

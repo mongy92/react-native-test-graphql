@@ -9,7 +9,10 @@ export default class AuthForm extends Component {
     }
 
     submitForm = () => {
-
+        this.props.onSubmit({
+            email : this.state.email,
+            password : this.state.password
+        })
     }
     render() {
         return (
