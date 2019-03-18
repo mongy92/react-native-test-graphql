@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View,StyleSheet,Text ,TouchableHighlight } from "react-native";
+import { View,StyleSheet} from "react-native";
 import Posts from "../components/Posts";
 import {Icon, Fab} from "native-base";
 
@@ -14,10 +14,10 @@ class Home extends Component {
     }
 
     render() {
-        const {navigation} = this.props;
+        const {navigation, screenProps} = this.props;
         return (
             <View style={styles.container} >
-                <Posts navigation={navigation} />
+                <Posts navigation={navigation} posts = {screenProps.user.posts} />
                 <Fab style={styles.newPost} onPress={this.addNewPost}  >
                     <Icon name={"add"} />
                 </Fab>
@@ -31,20 +31,9 @@ export default Home;
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        // justifyContent:"space-between"
     },
     newPost:{
-        // padding:20,
-        // width:60,
-        // height:60,
-        // position:"absolute",
-        // bottom:30,
-        // right:30,
-        // borderRadius:30,
         backgroundColor:"orange",
-        // alignItems:"center",
-        // justifyContent:"center"
-        
     },
     newPostText:{
         fontWeight:"bold",

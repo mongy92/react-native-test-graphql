@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, Button } from 'react-native'
+import { View, StyleSheet, Button } from 'react-native'
 import AuthForm from '../components/AuthForm';
 
 
-import { compose, graphql } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import gql from 'graphql-tag';
 import {  signIn } from '../utils/user';
 

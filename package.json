@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.2.1",
     "apollo-cache-inmemory": "^1.5.1",
     "apollo-client": "^2.5.1",
     "apollo-link-context": "^1.0.15",
@@ -15,8 +16,8 @@
     "graphql-tag": "^2.10.1",
     "native-base": "^2.12.1",
     "react": "16.8.3",
-    "react-native": "0.59.0",
     "react-apollo": "^2.5.2",
+    "react-native": "0.59.0",
     "react-native-gesture-handler": "^1.1.0",
     "react-navigation": "^3.3.2"
   },

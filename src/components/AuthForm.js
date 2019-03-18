@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Button } from 'react-native'
+import {  Button } from 'react-native'
 import { Form, Input, Label, Item } from "native-base";
 export default class AuthForm extends Component {
 

@@ -3,9 +3,8 @@ import React from "react";
 import {ActivityIndicator} from "react-native";
 import {
     createAppContainer,
-    createStackNavigator,
-    createSwitchNavigator
-} from "react-navigation";
+    createStackNavigator
+  } from "react-navigation";
 import Home from "../screens/Home";
 import Post from "../screens/Post";
 import NewPost from "../screens/NewPost";
@@ -45,7 +44,11 @@ const MainStack = createStackNavigator({
     query userQuery{
       user{
         id,
-      email
+      email,
+      posts(orderBy : createdAt_DESC){
+        id,
+        title
+      }
       }
       
     }
@@ -53,10 +56,9 @@ const MainStack = createStackNavigator({
 
 
 const Navigation = ({loading, user})=>{
-  console.log(loading,user)
   if(loading) return <ActivityIndicator/>;
   if(!user) return <AuthNav/>;
-  return <MainNav/>
+  return <MainNav screenProps={{user}} />
 }
 
   export default graphql(userQuery,{

@@ -1,59 +1,62 @@
-import React, { Component } from 'react'
-import { Text, View, ActivityIndicator } from 'react-native'
+import React, { Component } from "react";
+import {  View, ActivityIndicator } from "react-native";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+
 import PostForm from "../components/PostForm";
-import gql from 'graphql-tag';
-import { graphql } from 'react-apollo'
 
 class NewPost extends Component {
-
   static navigationOptions = {
-    title : "New Post"
-  }
+    title: "New Post"
+  };
 
   state = {
-    loading : false
-  }
+    loading: false
+  };
 
-  onSubmit = ({title,body})=>{
-    const {newPost , navigation} = this.props;
-    this.setState({ loading : true });
-    newPost({ variables : { title, body }})
-    .then( ()=>{
-      navigation.goBack();
-    })
-    .catch( (error)=>{
-      this.setState({loading : false})
-    });
-  }
-render() {
-  return (
-    <View>
-      {
-        this.state.loading ? (
-          <ActivityIndicator size={"large"} />
-        ):
-        (
-          <PostForm onSubmit={this.onSubmit} />
-        )
+  newPost = ({ title, body }) => {
+    const { newPost, navigation, screenProps } = this.props;
+    this.setState({ loading: true });
+    newPost({
+      variables: {
+        title,
+        body,
+        userId: screenProps.user.id
       }
-    </View>
-  )
-}
-}
+    })
+      .then(() => {
+        navigation.goBack();
+      })
+      .catch(error => {
+        this.setState({ loading: false });
+        console.log(error);
+      });
+  };
 
+  render() {
+    return (
+      <View>
+        {this.state.loading ? (
+          <ActivityIndicator size="large" />
+        ) : (
+          <PostForm onSubmit={this.newPost} />
+        )}
+      </View>
+    );
+  }
+}
 
 const newPost = gql`
-  mutation newPost($title:String!,$body:String!){
-    createPost(title : $title, body : $body){
+  mutation newPost($title: String!, $body: String!, $userId: ID!) {
+    createPost(title: $title, body: $body, userId: $userId) {
       id
     }
   }
-`
+`;
 
-
-export default graphql(newPost,{
-  name : "newPost",
-  options : {
-    refetchQueries : ['postsQuery']
+export default graphql(newPost, {
+  name: "newPost",
+  options: {
+    refetchQueries: ["userQuery"]
   }
 })(NewPost);
