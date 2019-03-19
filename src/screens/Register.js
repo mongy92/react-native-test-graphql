@@ -19,10 +19,8 @@ class Register extends Component {
             const token = await this.props.login({
                 variables : { email, password }
             });
-
             signIn(token.data.signinUser.token)
-
-            
+            this.props.client.resetStore()
         }catch(e){
             console.log(e);
         }

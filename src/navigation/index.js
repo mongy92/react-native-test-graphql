@@ -12,16 +12,16 @@ import Login from "../screens/Login";
 import Register from "../screens/Register";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-
+import {withApollo}  from "react-apollo";
 const AuthStack = createStackNavigator({
-  Login,
-  Register
+  Login : withApollo(Login),
+  Register : withApollo(Register)
 })
 
 
 
 const MainStack = createStackNavigator({
-    Home,
+    Home : withApollo(Home),
     Post,
     NewPost
   }, {
@@ -35,7 +35,7 @@ const MainStack = createStackNavigator({
   
     
   
-  const MainNav = createAppContainer(MainStack);
+  const MainNav =  createAppContainer(MainStack);
   const AuthNav = createAppContainer(AuthStack);
 
 
@@ -57,7 +57,7 @@ const MainStack = createStackNavigator({
 
 const Navigation = ({loading, user})=>{
   if(loading) return <ActivityIndicator/>;
-  if(!user) return <AuthNav/>;
+  if(!user) return <AuthNav  />;
   return <MainNav screenProps={{user}} />
 }
 

@@ -21,7 +21,7 @@ class Login extends Component {
             });
 
             signIn(token.data.signinUser.token)
-
+            this.props.client.resetStore()
             console.log(token);
             
         }catch(e){
